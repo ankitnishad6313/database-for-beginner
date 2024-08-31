@@ -1,0 +1,119 @@
+SQL*Plus: Release 11.2.0.2.0 Beta on Tue Nov 1 18:25:06 2022
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+SQL> connect mydb/mydb;
+Connected.
+SQL> create table login_info
+  2  (
+  3   User_id number(5) primary key,
+  4   Passwd varchar2(10) not null
+  5  );
+
+Table created.
+
+SQL> alter table login_info add HINT_QUES varchar2(30);
+
+Table altered.
+
+SQL> desc login_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_ID                                   NOT NULL NUMBER(5)
+ PASSWD                                    NOT NULL VARCHAR2(10)
+ HINT_QUES                                          VARCHAR2(30)
+
+SQL> alter table login_info drop column HINT_QUES;
+
+Table altered.
+
+SQL> desc login_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_ID                                   NOT NULL NUMBER(5)
+ PASSWD                                    NOT NULL VARCHAR2(10)
+
+SQL> alter table login_info modify Passwd varchar2(15);
+
+Table altered.
+
+SQL> desc login_info;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ USER_ID                                   NOT NULL NUMBER(5)
+ PASSWD                                    NOT NULL VARCHAR2(15)
+
+SQL> create table Employees
+  2  (
+  3      Employee_Id number(5) not null,
+  4      Employee_Name varchar2(20) null
+  5  );
+
+Table created.
+
+SQL> create table Orders
+  2  (
+  3      Product_Id number(5) not null,
+  4      Product varchar2(20) null,
+  5      Employee_Id number(5)
+  6  );
+
+Table created.
+
+SQL> insert into Employees values(1001,'Karan');
+
+1 row created.
+
+SQL> insert into Employees values(1002,'Shikhar');
+
+1 row created.
+
+SQL> insert into Employees values(1003,'Rajan');
+
+1 row created.
+
+SQL> insert into Orders values(1,'Table',1001);
+
+1 row created.
+
+SQL> insert into Orders values(2,'Chair',1002);
+
+1 row created.
+
+SQL> insert into Orders values(3,'Printer',1003);
+
+1 row created.
+
+SQL> select Employee_Name, Product from Employees, Orders where Employees.Employee_Id=Orders.Employee_Id;
+
+EMPLOYEE_NAME        PRODUCT
+-------------------- --------------------
+Karan                Table
+Shikhar              Chair
+Rajan                Printer
+
+SQL> select Employee_Name, Product from Employees left join Orders on Employees.Employee_Id=Orders.Employee_Id;
+
+EMPLOYEE_NAME        PRODUCT
+-------------------- --------------------
+Karan                Table
+Shikhar              Chair
+Rajan                Printer
+
+SQL> select Employee_Name, Product from Employees right join Orders on Employees.Employee_Id=Orders.Employee_Id;
+
+EMPLOYEE_NAME        PRODUCT
+-------------------- --------------------
+Karan                Table
+Shikhar              Chair
+Rajan                Printer
+
+SQL>
+
+
+select Employee_Name, Product from Employees left join Orders on Employees.Employee_Id=Orders.Employee_Id;
+
+
+select Employee_Name, Product from Employees left join Orders on Employees.Imployees_id=Orders.Imployees_id;
+
+select Employee_Name, Product from Employees left join Orders on Employees.Imployees_id=Orders.Imployees_id;

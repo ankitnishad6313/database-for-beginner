@@ -1,0 +1,194 @@
+
+SQL> connect Ankit/1234;
+Connected.
+SQL> create table employee
+  2  (
+  3      empid varchar2(10) check (empid like 'SPI%'),
+  4      empname varchar2(20) check (empname =upper(empname)),
+  5      country varchar2(5) check (country in ('India','Nepal')),
+  6      salary number(6) check (salary<=100000),
+  7      primary key (empid)
+  8  );
+
+Table created.
+
+SQL> insert into employee values ('SPI1001', 'BRIJESH MISHRA', 'India', '50000');
+
+1 row created.
+
+SQL> insert into employee values ('SPI1002', 'ROHIT KUMAR', 'India', '55000');
+
+1 row created.
+
+SQL> insert into employee values ('SPI1003', 'YASHI ASTHANA', 'India', '100000');
+
+1 row created.
+
+SQL> insert into employee values ('SPI1004', 'ANAND SINGH', 'India', '50000');
+
+1 row created.
+
+SQL> insert into employee values ('SPI1005', 'SAGAR MISHRA', 'India', '40000');
+
+1 row created.
+
+SQL> create table product(
+  2      pid varchar2(10) primary key check (pid like ('P%')),
+  3      pname varchar2(20) check (pname = upper(pname)),
+  4      empid varchar2(10),
+  5      foreign key (empid) references employee(empid)
+  6  );
+
+Table created.
+
+SQL> insert into product values ('P101', 'PRINTER', 'SPI1001');
+
+1 row created.
+
+SQL> insert into product values ('P102', 'SCANNER', 'SPI1002');
+
+1 row created.
+
+SQL> insert into product values ('P103', 'PLOTTER', 'SPI1002');
+
+1 row created.
+
+SQL> insert into product values ('P104', 'LAPTOP', 'SPI1003');
+
+1 row created.
+
+SQL> insert into product values ('P105', 'DESKTOP', 'SPI1004');
+
+1 row created.
+
+SQL> insert into product values ('P106', 'PROJECTOR', '');
+
+1 row created.
+
+SQL> select empname, pname from employee, product where employee.empid = product.empid;
+
+EMPNAME              PNAME
+-------------------- --------------------
+BRIJESH MISHRA       PRINTER
+ROHIT KUMAR          SCANNER
+ROHIT KUMAR          PLOTTER
+YASHI ASTHANA        LAPTOP
+ANAND SINGH          DESKTOP
+
+SQL> select empname, pname from employee left join product on employee.empid = product.empid;
+
+EMPNAME              PNAME
+-------------------- --------------------
+BRIJESH MISHRA       PRINTER
+ROHIT KUMAR          SCANNER
+ROHIT KUMAR          PLOTTER
+YASHI ASTHANA        LAPTOP
+ANAND SINGH          DESKTOP
+SAGAR MISHRA
+
+6 rows selected.
+
+SQL> select empname, pname from employee right join product on employee.empid = product.empid;
+
+EMPNAME              PNAME
+-------------------- --------------------
+BRIJESH MISHRA       PRINTER
+ROHIT KUMAR          PLOTTER
+ROHIT KUMAR          SCANNER
+YASHI ASTHANA        LAPTOP
+ANAND SINGH          DESKTOP
+                     PROJECTOR
+
+6 rows selected.
+
+SQL> select * from employee where salary = (select max(salary) from employee);
+
+EMPID      EMPNAME              COUNT     SALARY
+---------- -------------------- ----- ----------
+SPI1003    YASHI ASTHANA        India     100000
+
+SQL> select * from employee where salary = (select max(salary) from employee where salary < (select max(salary) from employee));
+
+EMPID      EMPNAME              COUNT     SALARY
+---------- -------------------- ----- ----------
+SPI1002    ROHIT KUMAR          India      55000
+
+SQL> set serveroutput on
+SQL> declare
+  2  first int;
+  3  second int;
+  4  temp int;
+  5  n int;
+  6  i int;
+  7  begin
+  8  first:=&First_Number;
+  9  second:=&Second_Number;
+ 10  dbms_output.put_line('How many term you want ?');
+ 11  n:=&n;
+ 12     dbms_output.put_line('Series:');
+ 13      dbms_output.put_line(first);
+ 14      dbms_output.put_line(second);
+ 15     for i in 2..n
+ 16     loop
+ 17             temp:=first+second;
+ 18  first := second;
+ 19  second := temp;
+ 20     dbms_output.put_line(temp);
+ 21  end loop;
+ 22  end;
+ 23  /
+Enter value for first_number: 1
+old   8: first:=&First_Number;
+new   8: first:=1;
+Enter value for second_number: 2
+old   9: second:=&Second_Number;
+new   9: second:=2;
+Enter value for n: 10
+old  11: n:=&n;
+new  11: n:=10;
+How many term you want ?
+Series:
+1
+2
+3
+5
+8
+13
+21
+34
+55
+89
+144
+
+PL/SQL procedure successfully completed.
+
+SQL> declare
+  2  empid varchar2(10);
+  3  empname varchar2(20);
+  4  country varchar2(5);
+  5  salary number(6);
+  6
+  7  begin
+  8      empid:=&empid;
+  9      empname:=&empname;
+ 10      country:=&country;
+ 11      salary:=&salary;
+ 12      insert into employee values (empid, empname, country, salary);
+ 13      commit;
+ 14  end;
+ 15  /
+
+Enter value for empid: 'SPI1006'
+old   8:     empid:=&empid;
+new   8:     empid:='SPI1006';
+Enter value for empname: 'ANKIT KUMAR'
+old   9:     empname:=&empname;
+new   9:     empname:='ANKIT KUMAR';
+Enter value for country: 'India'
+old  10:     country:=&country;
+new  10:     country:='India';
+Enter value for salary: '50000'
+old  11:     salary:=&salary;
+new  11:     salary:='50000';
+
+PL/SQL procedure successfully completed.

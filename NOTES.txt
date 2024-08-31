@@ -1,0 +1,431 @@
+SQL :- SQL stands for structured query language. It is used to perform database operation .
+Based on database operations sql is divided in four parts :-
+1.DDL(Data Definition Language)
+2.DML(Data Manipulation Language)
+3.DCL(Data Control Language)
+4.TCL(Transaction Control Language)
+
+Commands of DDL :- 
+i) create :- create command is used to create a new database object.
+    create table table_name
+    create view view_name
+    create user user_name
+
+ii) alter :- alter command is used to modify structure of database object.
+
+iii) drop :- drop command is used to delete database object.
+
+iv) truncate :- truncate command is used to delete all data from database object.
+
+v) backup :- backup command is used to take backup of database.
+
+vi) restore :- restore command is used to reconstruct database from its backup.
+
+
+Commands of DML :-
+
+i) insert :- The insert command is used to insert record into database object (table,view).
+
+ii) delete :- The delete command is used to delete record from database object (delete entire row).
+
+iii) update :- The update command is used to modify record in database object. 
+
+iv) select :- The select command is used to select records from database object.
+
+Commands of DCL :-
+
+i) grant :- grant command is used to give rights to database user.
+
+ii) revoke :- revoke command is used to take off rights from database user. It is just opposite to grant command.
+
+iii) rename :- rename command is used to change name of database object.
+
+Commands of TCL :-
+
+i) commit :- commit command is used to save transaction.
+
+ii) rollback :- rollback command is work like undo.
+
+
+---------------------------------------------------------------------
+sqlplus / sysdba then press enter 2 times
+
+SQL>
+
+---------------------------------------------------------------------------------
+
+Use of create command to create a new user :-
+
+Synatx :- 
+
+create user 'user_name' identified by 'password';
+
+e.g. 
+
+    create user app2022 identified by test;
+
+Use of grant command to give rights to user :-
+
+Synatx :-
+
+grant grant to user_name 
+    
+    e.g.
+
+    grant dba to app2022;
+
+-------------------------------------------------------
+Use of create command to create a new table :-
+ Table : Table is a collection of rows and columns.
+        Rows are called tuple and columns are called attributes.
+Synatx to create table :-
+    create table <table_name>
+    (
+        <column_name1> <datatype>,
+        <column_name2> <datatype>,
+        <column_name3> <datatype>,
+        <column_name4> <datatype>    
+    );
+
+Table Name :- employee
+
+empid               int             PRIMARY KEY
+empname             varchar2(30)
+department          varchar2(20)
+salary              int 
+
+Primary Key :- Primary key is a field in a table, which is used to identify each record uniquely. 
+                It is atomic and not null.
+
+create table employee
+(
+    empid int primary key,
+    empname varchar2(30),
+    department varchar2(20),
+    salary int
+);
+
+
+--------------------------------------------------------------------------------
+Use of insert command to insert record into table :-
+    Synatx :-
+        insert into <table_name> values(<value1>,<value2>,<value3>,<value4>);
+
+    e.g.
+
+        insert into employee values(1001,'Ankit Kumar','Development',45000);
+
+        insert into employee values(1002,'Ajay','Management',80000);
+        insert into employee values(1003,'Nisha','HR',40000);
+        insert into employee values(1004,'Shikha','Development',50000);
+
+----------------------------------------------------------------------------------
+
+Use of select command to select record from table :-
+    select * from employee;
+
+----------------------------------------------------------------------------------
+Use of insert command to insert data in specific columns of table :-
+    Synatx :- 
+                insrt into table_name (<column1>,<column2>,<column3>,<column4>) values (<value1>,<value2><value3>,<value4>)
+
+    e.g.
+            insert into employee(empid,empname,department)values(1005,'Ritesh','Development');
+
+--------------------------------------------------------------------------------------------------------
+Use of select command :-
+1. Use of select command to select all columns of table :-
+    select * from table_name;
+    select * from employee;
+
+2. Use of select command to select specific columns.
+    select <column1>, <column2> from <table_name>;
+    select empid,empname,salary from employee;
+
+--------------------------------------------------------------------------------------------------------
+Use of where clause :- Where clause is used to specify condition in sql statement.
+    select * from <table_name> where <condition>;
+    e.g.
+        select * from employee where empid=1001;
+---------------------------------------------------------------------------------------------------------
+Operators in SQL :-
+=               equality 
+>               greator than
+<               less than
+<=              greator than or equal to
+>=              less than or equal to
+<>              not equal
+in              compare value in given values
+between         check whether given value is available in given range or not
+like            this operator is used for pattern matching 
+
+--------------------------------------------------------------------------------------------------------
+Use of delete command to delete record from table :-
+    Synatx :-
+        delete from <table_name> where <condition>;
+    e.g.
+        delete from employee where empid=1001;
+--------------------------------------------------------------------------------------------------------
+Use of update command to modify record of table :-
+    Synatx :-
+        update <table_name> set <column1> = <value1>,<column2> = <value2> where <condition>;
+    e.g.
+        update employee set salary = 30000 where empid=1005;
+--------------------------------------------------------------------------------------------------------
+Use of truncate command to delete all records from table :-
+    Synatx :-
+        truncate table <table_name>;
+        truncate table employee;
+--------------------------------------------------------------------------------------------------------
+Use of Drop command :-
+ Synatx :- 
+     drop table <table_name>;
+     drop table employee;
+
+
+------------------------------------------------------------------------------------------------
+Order By :-
+
+------------------------------------------------------------------------------------------------
+Use of alter command to add a new column :-
+Synatx :-
+    alter table <table_name> add <column_name> <data_type>;
+e.g.
+    alter table login add usertype varchar2(20);
+------------------------------------------------------------------------------------------------
+
+Use of alter command to delete column :-
+Synatx :-
+    alter table <table_name> drop column <column_name>;
+e.g.
+    alter table login drop column usertype;
+------------------------------------------------------------------------------------------------
+Use of alter command to modify column :-
+Synatx :-
+    alter table <table_name> modify <column_name> <data_type>;
+e.g.
+    alter table login modify password varchar2(10);
+------------------------------------------------------------------------------------------------
+Use of alter command to rename column :-
+Synatx :-
+    alter table <table_name> rename column <old_column_name> to <new_column_name>;
+e.g.
+    alter table login rename column password to passcode;
+------------------------------------------------------------------------------------------------
+Use of rename command to change name of database object :-
+Synatx :-
+    rename <old_name> to <new_name>;
+e.g.
+    rename login to logininfo;
+------------------------------------------------------------------------------------------------
+Command to see total table in user :-
+    select * from tab;
+------------------------------------------------------------------------------------------------
+create table employee
+(
+    empid number(5) primary key,
+    empname varchar2(30),
+    salary number(8)
+);
+
+insert into employee values(101,'Rajeev',35000);
+insert into employee values(102,'Priya',30000);
+insert into employee values(103,'Munna',10000);
+------------------------------------------------------------------------------------------------
+SQL Function :- SQL has many built-in functions.
+                These functions are used with select command.
+    sum() :- sum() function is used to find sum of values of given column.
+e.g.
+    select sum(salary) "Total Salary" from employee;
+------------------------------------------------------------------------------------------------
+max() :- max() function is used to find maximum value in given column.
+
+e.g.
+    select max(salary) "Maximum Salary" from employee;
+
+------------------------------------------------------------------------------------------------
+min() :- min() function is used to find manimum value in given column.
+
+e.g.
+    select min(salary) "Manimum Salary" from employee;
+
+------------------------------------------------------------------------------------------------
+count() :- The count() function is used to count numbers of rows in a table.
+      e.g.  select count(*) "Numbers of Rows" from employee;
+
+upper() :- The upper() function converts string data into uppercase.
+      e.g. 
+      select upper(empname) "Employee Name" from employee;
+        
+lower() :- The lower() function converts string data into lowercase.
+     e.g.   
+        select lower(empname) "Employee Name" from employee;
+     
+avg() :- The avg() function is used to find average of values in given column.
+    e.g.
+    select avg(salary) "Average Salary" from employee;
+
+        select * from employee where salary =(select max(salary) from employee where salary < (select max(salary) from employee));
+------------------------------------------------------------------------------------------------
+Nested Query :-
+                If you use a sql query inside another sql query, then it is called nested query.
+                    It is also called subquery.
+
+    Example 1:- Write a sql statement to find record with largest salary in employee table.
+        e.g.
+        select * from employee where salary = (select max(salary) from employee); 
+
+    Example 2:- Write a sql statement to find record with second largest salary in employee table.
+        e.g.
+        select * from employee where salary =(select max(salary) from employee where salary < (select max(salary) from employee));
+
+------------------------------------------------------------------------------------------------
+Min  Salary :-
+select * from employee where salary = (select min(salary) from employee);
+
+Second Min Salary :-
+        select * from employee where salary = (select min(salary) from employee where salary > (select min(salary) from employee));
+
+------------------------------------------------------------------------------------------------
+Join Operation :-
+        If you want to select data from two tables,then you need to perform join operation.
+        For join operation atleast one column should be common in both tables.
+
+Foregin Key :- Foregin key is a field in a table which wroks as primary key in another table.
+                Foregin key is used to establish relationship in two tables.
+        Notes :- There can be more than one foregin key in a table.
+
+------------------------------------------------------------------------------------------------
+create table empinfo
+(
+    empid number(5) primary key,
+    empname varchar2(20)
+);
+
+create table product
+(
+    pid number(5) primary key,
+    pname varchar2(20),
+    empid number(5),
+    foreign key(empid) references empinfo(empid)
+);
+
+------------------------------------------------------------------------------------------------
+insert into empinfo values(1001,'John');
+insert into empinfo values(1002,'Brown');
+insert into empinfo values(1003,'Smith');
+insert into empinfo values(1004,'Lily');
+
+------------------------------------------------------------------------------------------------
+insert into product values(101,'Printer','1001');
+insert into product values(102,'Scannner','1002');
+insert into product values(103,'Plotter','1002');
+insert into product values(104,'Laptop','1003');
+insert into product(pid,pname) values(105,'Projector');
+
+------------------------------------------------------------------------------------------------
+Natural join Operation :-
+            select empname, pname from empinfo, product where empinfo.empid = product.empid;
+
+------------------------------------------------------------------------------------------------
+Left Join Operation :-
+            When you perform left join operation then all records of left table are displayed and matching 
+            records of right table are displayed.
+
+    select empname, pname from empinfo left join product on empinfo.empid = product.empid;
+------------------------------------------------------------------------------------------------
+
+Right Join Operation :-
+            When you perform right join operation then all records of right table are displayed and matching
+            records of left table are displayed.
+
+    select empname, pname from empinfo right join product on empinfo.empid = product.empid;
+
+------------------------------------------------------------------------------------------------
+View  :- View is logical table, which is created from another table  (main table).
+            Main table is affected with the change in view.
+Now we create a table name spiemp having fields empid, empname, grade, salary.
+
+create table spiemp
+(
+    empid number(5) primary key,
+    empname varchar2(30),
+    grade varchar2(2),
+    salary number(8)
+);
+
+
+==================================================================================================
+
+Now we create a view with fields empid and empname.
+
+create view emp as (select empid, empname from spiemp);
+
+insert into emp values (1001,'Brijesh');
+insert into emp values (1002,'Ankit');
+insert into emp values (1003,'Diwakar');
+insert into emp values (1004,'Ritesh');
+insert into emp values (1005,'Akshay');
+insert into emp values (1006,'Uday');
+insert into emp values (1007,'Akhil');
+
+delete from emp where empid=1007;
+
+drop view emp;
+------------------------------------------------------------------------------------------------
+Use of like Operator :-
+============================
+Like operator is used to match pattern in data values.
+
+create table student
+(
+    rollno number(5) primary key,
+    name varchar2(30),
+    branch varchar2(20)
+);
+
+insert into student values (1001,'Ajay Singh','CS');
+insert into student values (1002,'Priya','IT');
+insert into student values (1003,'Brijesh Mishra','CS');
+insert into student values (1004,'Prashant Seth','CS');
+
+select records of students with 'Singh' surname.
+
+select * from student where name like '%Singh';
+
+select records of student whose name is started from 'P'.
+
+select * from student where name like 'P%';
+
+***********************************************************************************************
+
+Composit Key or Candidate Key :- If you use more than one field for identification of record uniquely.
+                                   Then resulatant key is called as Composit Key or Candidate Key.
+
+create table shipment
+(
+    S# varchar2(5),
+    P# varchar2(5),
+    QTY number(8),
+    primary key (S#, P#)
+);
+
+***********************************************************************************************
+Check :- Check constraint is used to apply validation in table.
+
+Example :- Create a table with name 'staff' with following validation.
+    
+    fieldname                   datatype                    validation
+    empid                       varchar2(10)                Check empid must start with 'SPI'
+    empname                     varchar2(20)                Check empname must be in upper case 
+    country                     varchar2(5)                 Check country must be either 'India' or 'Nepal'
+    salary                      number(6)                   Check salary not more than 100000.
+
+create table employee
+(
+empid varchar2(10) check (empid like 'SPI%'),
+    empname varchar2(20) check (empname =upper(empname)),
+    country varchar2(5) check (country in ('India','Nepal')),
+    salary number(6) check (salary<=100000),
+    primary key (empid)
+);

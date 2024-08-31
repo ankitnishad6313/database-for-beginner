@@ -1,0 +1,279 @@
+SQL*Plus: Release 11.2.0.2.0 Beta on Sun Oct 30 23:54:46 2022
+
+Copyright (c) 1982, 2010, Oracle.  All rights reserved.
+
+SQL> connect mydb/mydb;
+Connected.
+SQL> create table cust_info
+  2  (
+  3      Cust_Id number(5) primary key,
+  4      Cust_Name varchar(20),
+  5      Cust_Address varchar(100),
+  6      Cust_connect_date date,
+  7      Contact_No varchar(15)
+  8  );
+
+Table created.
+
+SQL> insert into cust_info values(101,'Rajeev Singh','Lucknow','12-Dec-2012',05226565114);
+
+1 row created.
+
+SQL> insert into cust_info values(102,'Jitendra Verma','Sitapur','01-Jan-2013',9838505980);
+
+1 row created.
+
+SQL> insert into cust_info values(103,'Ravi Singh','Barabnaki','15-Jan-2013',9936652039);
+
+1 row created.
+
+SQL> insert into cust_info values(104,'Priya Singh','Lucknow','16-Jan-2013',9936390301);
+
+1 row created.
+
+SQL> insert into cust_info values(105,'Brijesh Mishra','Barabnaki','16-Feb-2013',8738970899);
+
+1 row created.
+
+SQL> insert into cust_info values(106,'Amit Singh','Lucknow','18-March-2013','0548-2202798');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from cust_info;
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+       101 Rajeev Singh
+Lucknow
+12-DEC-12 5226565114
+
+       102 Jitendra Verma
+Sitapur
+01-JAN-13 9838505980
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+
+       103 Ravi Singh
+Barabnaki
+15-JAN-13 9936652039
+
+       104 Priya Singh
+Lucknow
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+16-JAN-13 9936390301
+
+       105 Brijesh Mishra
+Barabnaki
+16-FEB-13 8738970899
+
+       106 Amit Singh
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+Lucknow
+18-MAR-13 0548-2202798
+
+
+6 rows selected.
+
+SQL> select Cust_Id,Cust_Name from cust_info;
+
+   CUST_ID CUST_NAME
+---------- --------------------
+       101 Rajeev Singh
+       102 Jitendra Verma
+       103 Ravi Singh
+       104 Priya Singh
+       105 Brijesh Mishra
+       106 Amit Singh
+
+6 rows selected.
+
+SQL> select Cust_Id,Cust_Name,Cust_connect_date from cust_info where  Cust_connect_date > '15-Jan-2013';
+
+   CUST_ID CUST_NAME            CUST_CONN
+---------- -------------------- ---------
+       104 Priya Singh          16-JAN-13
+       105 Brijesh Mishra       16-FEB-13
+       106 Amit Singh           18-MAR-13
+
+SQL> select * from cust_info where Cust_Address = 'Lucknow';
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+       101 Rajeev Singh
+Lucknow
+12-DEC-12 5226565114
+
+       104 Priya Singh
+Lucknow
+16-JAN-13 9936390301
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+
+       106 Amit Singh
+Lucknow
+18-MAR-13 0548-2202798
+
+
+SQL> select * from cust_info order by Cust_Name ASC;
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+       106 Amit Singh
+Lucknow
+18-MAR-13 0548-2202798
+
+       105 Brijesh Mishra
+Barabnaki
+16-FEB-13 8738970899
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+
+       102 Jitendra Verma
+Sitapur
+01-JAN-13 9838505980
+
+       104 Priya Singh
+Lucknow
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+16-JAN-13 9936390301
+
+       101 Rajeev Singh
+Lucknow
+12-DEC-12 5226565114
+
+       103 Ravi Singh
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+Barabnaki
+15-JAN-13 9936652039
+
+
+6 rows selected.
+
+SQL> select * from cust_info order by Cust_Name DESC;
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+       103 Ravi Singh
+Barabnaki
+15-JAN-13 9936652039
+
+       101 Rajeev Singh
+Lucknow
+12-DEC-12 5226565114
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+
+       104 Priya Singh
+Lucknow
+16-JAN-13 9936390301
+
+       102 Jitendra Verma
+Sitapur
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+01-JAN-13 9838505980
+
+       105 Brijesh Mishra
+Barabnaki
+16-FEB-13 8738970899
+
+       106 Amit Singh
+
+   CUST_ID CUST_NAME
+---------- --------------------
+CUST_ADDRESS
+--------------------------------------------------------------------------------
+CUST_CONN CONTACT_NO
+--------- ---------------
+Lucknow
+18-MAR-13 0548-2202798
+
+
+6 rows selected.
+
+SQL> delete from cust_info where Cust_Id=105;
+
+1 row deleted.
+
+SQL> update cust_info set Contact_No='0522-6767144' where Cust_Id=106;
+
+1 row updated.
+
+SQL> truncate table cust_info;
+
+Table truncated.
+
+SQL> drop table cust_info;
+
+Table dropped.
+
+SQL>

@@ -1,0 +1,81 @@
+SQL> select * from employee;
+
+     EMPID EMPNAME                            SALARY
+---------- ------------------------------ ----------
+       101 Rajeev                              35000
+       102 Priya                               30000
+       103 Munna                               10000
+
+SQL> select count(*) "number of rows" from employee;
+
+number of rows
+--------------
+             3
+
+SQL> select upper(empname) "Employee Name" from employee;
+
+Employee Name
+------------------------------
+RAJEEV
+PRIYA
+MUNNA
+
+SQL> select lower(empname) "Employee Name" from employee;
+
+Employee Name
+------------------------------
+rajeev
+priya
+munna
+
+SQL> select avg(salary) "Average Salary" from employee;
+
+Average Salary
+--------------
+         25000
+
+SQL> select max(salary) from employee;
+
+MAX(SALARY)
+-----------
+      35000
+
+SQL> select * from employee where salary = (select max(salary) from employee);
+
+     EMPID EMPNAME                            SALARY
+---------- ------------------------------ ----------
+       101 Rajeev                              35000
+
+SQL> select * from employee;
+
+     EMPID EMPNAME                            SALARY
+---------- ------------------------------ ----------
+       101 Rajeev                              35000
+       102 Priya                               30000
+       103 Munna                               10000
+
+SQL> select * from employee where salary =(select max(salary) from employee where salary < (select max(salary) from employee));
+
+     EMPID EMPNAME                            SALARY
+---------- ------------------------------ ----------
+       102 Priya                               30000
+
+SQL> ------------------------------------------------------------------------------------------------
+SQL> select * from employee where salary = (select min(salary) from employee);
+
+     EMPID EMPNAME                            SALARY
+---------- ------------------------------ ----------
+       103 Munna                               10000
+
+SQL> select * from employee where salary = (select min(salary) from employee where salary > (select min(salary) from employee));
+
+     EMPID EMPNAME                            SALARY
+---------- ------------------------------ ----------
+       102 Priya                               30000
+
+SQL>
+
+
+
+
+
