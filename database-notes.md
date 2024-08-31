@@ -1,7 +1,3 @@
-Here is the corrected version of your SQL explanation with improved grammar:
-
----
-
 ### SQL (Structured Query Language)
 
 SQL is used to perform database operations. Based on these operations, SQL is divided into four main categories:
